@@ -226,9 +226,13 @@ func (v *vaultSrv) Apply(pt *core.PodTemplateSpec) error {
 	// Add init container
 	// this init container will append user provided configuration
 	// file to the controller provided configuration file
+	initContainerImage := "busybox"
+	if v.vs.Spec.InitContainerImage != "" {
+		initContainerImage = v.vs.Spec.InitContainerImage
+	}
 	initCont := core.Container{
 		Name:            util.VaultInitContainerName,
-		Image:           "busybox",
+		Image:           initContainerImage,
 		ImagePullPolicy: core.PullIfNotPresent,
 		Command:         []string{"/bin/sh"},
 		Args: []string{

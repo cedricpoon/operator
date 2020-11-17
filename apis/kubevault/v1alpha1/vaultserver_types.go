@@ -100,6 +100,10 @@ type VaultServerSpec struct {
 	// ServiceTemplate is an optional configuration for service used to expose vault
 	// +optional
 	ServiceTemplate ofst.ServiceTemplateSpec `json:"serviceTemplate,omitempty" protobuf:"bytes,11,opt,name=serviceTemplate"`
+
+	// InitContainerImage is an optional configuration for initContainer (i.e. busybox) image
+	// +optional
+	InitContainerImage string `json:"initContainerImage,omitempty" protobuf:"bytes,12,opt,name=initContainerImage"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
