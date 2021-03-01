@@ -41,9 +41,9 @@ func GetJwtTokenSecretFromServiceAccount(kc kubernetes.Interface, name, namespac
 		// get secret
 		for _, s := range sa.Secrets {
 			sr, err := kc.CoreV1().Secrets(namespace).Get(s.Name, metav1.GetOptions{})
-			if err == nil {
+			if err == nil && sr.Type == core.SecretTypeServiceAccountToken {
 				return sr, nil
-			} else if !kerr.IsNotFound(err) {
+			} else if err != nil && !kerr.IsNotFound(err) {
 				return nil, err
 			}
 		}
