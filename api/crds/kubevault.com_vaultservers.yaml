@@ -3150,6 +3150,10 @@ spec:
                     type: object
                 type: object
               type: array
+            initContainerImage:
+              description: InitContainerImage is an optional configuration for initContainer
+                (i.e. busybox) image
+              type: string
             monitor:
               description: Monitor is used monitor database instance
               properties:
